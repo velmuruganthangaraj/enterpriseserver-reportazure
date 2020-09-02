@@ -49,6 +49,10 @@
         "Standard_RAGRS",
         "Premium_LRS"
       ]
+    },
+    "utcShortValue": {
+      "type": "string",
+      "defaultValue": "[utcNow('d')]"
     }
   },
   "variables": {
@@ -58,7 +62,7 @@
       "Report Server with User Management Server": "RS-UMS"
     },
     "SelectAppServiceNeedToDeploy": "[variables('AppServiceType')[parameters('SelectAppServiceNeedToDeploy')]]",
-    "templatelink": "[concat('https://raw.githubusercontent.com/syncfusion/enterpriseserver-reportazure/master/armtemplates/v4.1.0.25/',parameters('storageType'),'-ReportServer.json')]",
+    "templatelink": "[concat('https://raw.githubusercontent.com/velmuruganthangaraj/enterpriseserver-reportazure/master/armtemplates/v4.1.0.25/',parameters('storageType'),'-ReportServer.json')]",
     "rsGithubUrl": "https://github.com/syncfusion/enterpriseserver-reportazure.git",
     "umsGithubUrl": "https://github.com/SyncfusionInstall/enterpriseserver-umsazure.git",
     "rsReleaseVersion": "v4.1.0.25",
@@ -71,19 +75,19 @@
       "remoteDebuggingEnabled": false,
       "use32BitWorkerProcess": true,
       "virtualApplications": [
-              {
-                "virtualPath": "/",
-                "physicalPath": "site\\wwwroot"
-              },
-              {
-                "virtualPath": "/API",
-                "physicalPath": "site\\wwwroot\\API"
-              },
-              {
-                "virtualPath": "/ReportService",
-                "physicalPath": "site\\wwwroot\\ReportService"
-              }
-            ],
+        {
+          "virtualPath": "/",
+          "physicalPath": "site\\wwwroot"
+        },
+        {
+          "virtualPath": "/API",
+          "physicalPath": "site\\wwwroot\\API"
+        },
+        {
+          "virtualPath": "/ReportService",
+          "physicalPath": "site\\wwwroot\\ReportService"
+        }
+      ],
       "webSocketsEnabled": true
     },
     "UMS": {
@@ -202,7 +206,18 @@
         "name": "[variables('appSvcPlanSkuName')]"
       },
       "tags": {
-        "displayName": "SyncfusionAppServicePlan"
+        "displayName": "SyncfusionAppServicePlan",
+        "AppName": "[resourceGroup().tags['AppName']]",
+        "Approver": "[resourceGroup().tags['Approver']]",
+        "BusinessUnit": "[resourceGroup().tags['BusinessUnit']]",
+        "Env": "[resourceGroup().tags['Env']]",
+        "HostModel": "[resourceGroup().tags['HostModel']]",
+        "Importance": "[resourceGroup().tags['Importance']]",
+        "Owner": "[resourceGroup().tags['Owner']]",
+        "Platform": "NA",
+        "ProductName": "[resourceGroup().tags['ProductName']]",
+        "Requester": "velmurugan.thangaraj@syncfusion.com",
+        "StartDate": "[parameters('utcShortValue')]"
       },
       "type": "Microsoft.Web/serverfarms"
     }
